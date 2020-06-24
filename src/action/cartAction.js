@@ -6,21 +6,20 @@ export const addToCart= (id)=>{
         id
     }
 }
-//remove item action
+
 export const removeItem=(id)=>{
     return{
         type: REMOVE_ITEM,
         id
     }
 }
-//subtract qt action
 export const subtract=(id)=>{
     return{
         type: SUB_QUANTITY,
         id
     }
 }
-//add qt action
+
 export const add=(id)=>{
     return{
         type: ADD_QUANTITY,

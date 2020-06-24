@@ -5,17 +5,17 @@ import { removeItem,addQuantity,subtractQuantity} from './actions/cartActions';
 import Recipe from './Recipe';
 class Cart extends Component{
 
-
+ 
     handleRemove = (id)=>{
         this.props.removeItem(id);
     }
     //to add the quantity
-    handleAddQuantity = (id)=>{
-        this.props.addQuantity(id);
+    handleAdd= (id)=>{
+        this.props.add(id);
     }
-  
-    handleSubtractQuantity = (id)=>{
-        this.props.subtractQuantity(id);
+    //to substruct from the quantity
+    handleSubtractQ = (id)=>{
+        this.props.subtract(id);
     }
     render(){
               
@@ -32,25 +32,40 @@ class Cart extends Component{
                                     <div className="item-desc">
                                         <span className="title">{item.title}</span>
                                         <p>{item.desc}</p>
-                                        <p><b>Price: {item.price}Rp</b></p> 
+                                        <p><b>Price: {item.price}$</b></p> 
                                         <p>
                                             <b>Quantity: {item.quantity}</b> 
                                         </p>
                                         <div className="add-remove">
-                                            <Link to="/user"><i className="material-icons" onClick={()=>{this.handleAddQuantity(item.id)}}>arrow_drop_up</i></Link>
-                                            <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleSubtractQuantity(item.id)}}>arrow_drop_down</i></Link>
+                                            <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleAdd(item.id)}}>arrow_drop_up</i></Link>//
+                                            <Link to="/cart"><i className="material-icons" onClick={()=>{this.handleSubtract(item.id)}}>arrow_drop_down</i></Link>
                                         </div>
-                                        <button className="waves-effect waves-light btn pink remove" onClick={()=>{this.handleRemove(item.id)}}>Remove</button>
+                                        <button className="waves-effect waves-light btn orange remove" onClick={()=>{this.handleRemove(item.id)}}>Remove</button>
+                                        <span to="/" className="btn-floating halfway-fab waves-effect waves-light red" ><button><i className="material-icons " data-toggle="modal" data-target="#myModal">add</i></span></button>
+
                                     </div>
                                     
                                 </li>
+                                <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
                          
                     )
                 })
             ):
 
              (
-                <p>Nothing.</p>
              )
        return(
             <div className="container">
@@ -70,14 +85,14 @@ class Cart extends Component{
 const mapStateToProps = (state)=>{
     return{
         items: state.addedItems,
-        //addedItems: state.addedItems
+        addedItems: state.addedItems
     }
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
         removeItem: (id)=>{dispatch(removeItem(id))},
-        addQuantity: (id)=>{dispatch(addQuantity(id))},
-        subtractQuantity: (id)=>{dispatch(subtractQuantity(id))}
+        add: (id)=>{dispatch((id))},
+        subtract: (id)=>{dispatch((id))}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Cart)

@@ -4,12 +4,12 @@ import { addShipping } from './actions/cartActions';
 class Recipe extends Component{
     
     componentWillUnmount() {
-         if(this.refs.shipping.checked)
+         if(this.refs.shipping.submit)
               this.props.substractShipping()
     }
 
-    handleChecked = (e)=>{
-        if(e.target.checked){
+    handlesubmit = (e)=>{
+        if(e.target.submit){
             this.props.addShipping();
         }
         else{
@@ -24,15 +24,13 @@ class Recipe extends Component{
                 <div className="collection">
                     <li className="collection-item">
                             <label>
-                                <input type="checkbox" ref="tambah wishlist" onChange= {this.handleChecked} />
-                                <span>tambah whislist</span>
+                                <input type="button" ref="lanjut belanja" onChange= {this.handlesubmit} />
+                                <span>tambah wishlist</span>
                             </label>
                         </li>
-                        <li className="collection-item"><b>Total: {this.props.total} $</b></li>
                     </div>
                     <div className="checkout">
-                        <button className="waves-effect waves-light btn">lanjut berbelanja</button>
-                        <button className="waves-effect waves-light btn">lanjut ke keranjang</button>
+                        <button className="waves-effect waves-light btn">beli sekarang</button>
                     </div>
                  </div>
         )
